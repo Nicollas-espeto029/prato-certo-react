@@ -8,8 +8,9 @@ function FoodCard({name, info, onRemove}){
       <div className="overlay"></div>
       <div className="food-content">
         <span className="food-name">{name}</span>
+        <br/>
         <span className="food-cat">{info.category}</span>
-        <span className="food-ings">Ingredientes: {info.ingredients.join(', ')}</span>
+        {/* <span className="food-ings">Ingredientes: {info.ingredients.join(', ')}</span> */}
         <div className="food-actions">
           <Link to={`/detalhes/${encodeURIComponent(name)}`} className="btn">Ver</Link>
           <button className="btn" onClick={()=>onRemove(name)}>Remover</button>
@@ -68,7 +69,8 @@ export default function Home(){
   return (
     <div className="page container mx-auto p-4">
       <header className="mb-4">
-        <h1 className="text-3xl font-bold text-red-600">Prato Certo</h1>
+        <h1 className="text-8xl font-bold text-red-600">Prato</h1>
+        <h1 className="text-7xl font-bold text-yellow-600">Certo</h1>
       </header>
 
       <main className="flex gap-4 flex-wrap">

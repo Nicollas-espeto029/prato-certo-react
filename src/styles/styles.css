@@ -5,19 +5,15 @@ body {
   margin: 0;
   padding: 0;
   min-height: 100vh;
-  background: #f5f0e1; /* bege claro */
+  background: #e0e3c7; /* bege claro */
   color: #333;
 }
 
 header {
-  background: #e53935; /* vermelho */
-  color: white;
-  padding: 1rem;
-  text-align: center;
-  font-size: 2rem;
-  font-weight: bold;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+    text-align: center;
 }
+
+
 
 /* menu cards */
 .food-card{
@@ -69,3 +65,14 @@ header {
 @media (max-width: 768px){
   .container{ padding: 1rem; }
 }
+
+.form-avaliacao {
+  display: flex;
+  flex-direction: column;
+  width: max-content;
+  }
+
+  .container-centro {
+    max-width: 900px; /* ajuste como quiser */
+    margin: 0 auto;   /* centraliza horizontalmente */
+  }

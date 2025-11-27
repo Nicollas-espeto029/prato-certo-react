@@ -1,19 +1,29 @@
-import React, { useContext } from 'react'
-import { useParams, Link } from 'react-router-dom'
-import { AppContext } from '../context/AppContext'
+import React, { useContext, useState } from "react";
+import { useParams, Link } from "react-router-dom";
+import { AppContext } from "../context/AppContext";
+import Rating from "@mui/material/Rating";
+import TextField from "@mui/material/TextField";
 
-export default function Details(){
-  const { id } = useParams()
-  const name = decodeURIComponent(id || '')
-  const { dishes } = useContext(AppContext)
-  const info = dishes[name]
+export default function Details() {
+  const [avaliacao, setAvaliacao] = useState(0);
+  const [nomePrato, setNomePrato] = useState("Nome do Prato");
 
-  if(!info) return <div className="p-8">Prato não encontrado. <Link to="/home">Voltar</Link></div>
+  const { id } = useParams();
+  const name = decodeURIComponent(id || "");
+  const { dishes } = useContext(AppContext);
+  const info = dishes[name];
+
+  if (!info)
+    return (
+      <div className="p-8">
+        Prato não encontrado. <Link to="/home">Voltar</Link>
+      </div>
+    );
 
   return (
     <div className="container mx-auto p-6">
       <header className="mb-6">
-        <h1 className="text-3xl font-bold text-red-600">Detalhes</h1>
+        <h1 className="text-3xl font-bold text-white-600">{nomePrato}</h1>
       </header>
       <div className="grid md:grid-cols-2 gap-6">
         <div>
@@ -23,20 +33,40 @@ export default function Details(){
           <h2 className="text-xl font-semibold mb-2">{name}</h2>
           <div>
             <h3 className="font-bold">Descrição</h3>
-            <ul className="list-disc ml-5">
-              {info.ingredients.map((i, idx)=> <li key={idx}>{i}</li>)}
+            <ul className="list-['-'] ml-5">
+              {info.ingredients.map((i, idx) => (
+                <li key={idx}>{i}</li>
+              ))}
             </ul>
           </div>
 
           <div className="mt-6">
             <h3 className="text-lg font-bold">Deixe sua avaliação abaixo</h3>
-            <div className="mt-3 flex items-center gap-4">
-              <div className="w-64 h-20 bg-gray-200 rounded"></div>
-              <div className="p-2 bg-red-600 rounded-full text-white">★ ★ ★ ★ ★</div>
-            </div>
+            <form className="form-avaliacao mt-3 flex items-center gap-4">
+              <TextField
+                id="outlined-multiline-static"
+                label="Avaliação"
+                multiline
+                rows={5}
+                sx={{ width: 300, ml: 2 }} 
+              />
+              <Rating
+                name="simple-controlled"
+                value={avaliacao}
+                onChange={(event, newValue) => {
+                  setAvaliacao(newValue);
+                }}
+              />
+             <button
+                type="submit"
+                className="bg-red-600 hover:bg-yellow-400 text-white px-5 py-2 rounded-md text-lg transition-colors"
+              >
+                Enviar
+              </button>
+            </form>
           </div>
         </div>
       </div>
     </div>
-  )
+  );
 }
