@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useNavigate, useParams, Link } from "react-router-dom";
 import { AppContext } from "../context/AppContext";
 import Rating from "@mui/material/Rating";
 import TextField from "@mui/material/TextField";
@@ -8,6 +8,7 @@ export default function Details() {
   const [avaliacao, setAvaliacao] = useState(0);
   const [nomePrato, setNomePrato] = useState("Nome do Prato");
 
+  const navigate = useNavigate();
   const { id } = useParams();
   const name = decodeURIComponent(id || "");
   const { dishes } = useContext(AppContext);
@@ -35,12 +36,12 @@ export default function Details() {
             <h3 className="font-bold">Descrição</h3>
             <ul className="list-['-'] ml-5">
               {info.ingredients.map((i, idx) => (
-                <li key={idx}>{i}</li>
+                <li key="idx">{i}</li>
               ))}
             </ul>
           </div>
 
-          <div className="mt-6">
+          <div className="">
             <h3 className="text-lg font-bold">Deixe sua avaliação abaixo</h3>
             <form className="form-avaliacao mt-3 flex items-center gap-4">
               <TextField
@@ -48,7 +49,7 @@ export default function Details() {
                 label="Avaliação"
                 multiline
                 rows={5}
-                sx={{ width: 300, ml: 2 }} 
+                sx={{ width: 300, ml: 2 }}
               />
               <Rating
                 name="simple-controlled"
@@ -57,12 +58,17 @@ export default function Details() {
                   setAvaliacao(newValue);
                 }}
               />
-             <button
-                type="submit"
-                className="bg-red-600 hover:bg-yellow-400 text-white px-5 py-2 rounded-md text-lg transition-colors"
-              >
-                Enviar
-              </button>
+              <div className="support-btn" type="submit">
+                <button
+                  type="button"
+                  onClick={() => navigate(-1)}
+                  className="bg-red-600 hover:bg-yellow-400 text-white px-5 py-2 rounded-md text-lg transition-colors">
+                  Voltar
+                </button>
+                <button className="bg-red-600 hover:bg-yellow-400 text-white px-5 py-2 rounded-md text-lg transition-colors">
+                  Enviar
+                </button>
+              </div>
             </form>
           </div>
         </div>

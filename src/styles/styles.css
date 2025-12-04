@@ -76,3 +76,12 @@ header {
     max-width: 900px; /* ajuste como quiser */
     margin: 0 auto;   /* centraliza horizontalmente */
   }
+
+  .support-btn{
+    display: flex;
+    gap: 14px;
+  }
+
+h2{
+  text-align: center;
+}

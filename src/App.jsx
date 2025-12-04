@@ -20,7 +20,7 @@ export default function App(){
         <Route path="/configuracoes" element={<Configuracoes/>} />
         <Route path="/favoritos" element={<Favoritos/>} />
         <Route path="/historico" element={<Historico/>} />
-        <Route path="*" element={<Navigate to="/home" replace />} />
+        <Route path="*" element={<Navigate to="/login" replace />} />
       </Routes>
     </AppProvider>
   )
