@@ -42,6 +42,14 @@ CREATE TABLE PratoAlimento (
     FOREIGN KEY (id_Alimento) REFERENCES Alimentos(id_Alimentos)
 );
 
+CREATE TABLE comentarios (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    id_usuario INT NOT NULL,
+    texto TEXT NOT NULL,
+    toxicidade FLOAT NOT NULL,
+    criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
 -- Inserts de usuários
 INSERT INTO Usuarios (nome, email, senha) VALUES
 ('Nicollas', 'nicollas123@gmail.com', 'nicollas123'),
@@ -95,3 +103,24 @@ SELECT
 FROM PratoAlimento
 INNER JOIN Pratos ON Pratos.id_pratos = PratoAlimento.id_pratos
 INNER JOIN Alimentos ON Alimentos.id_Alimentos = PratoAlimento.id_Alimento;
+
+ALTER TABLE Favoritos
+DROP FOREIGN KEY favoritos_ibfk_2;
+
+ALTER TABLE Favoritos
+ADD CONSTRAINT favoritos_ibfk_2
+FOREIGN KEY (id_usuario) REFERENCES Usuarios(id_Usuario)
+ON DELETE CASCADE;
+
+ALTER TABLE Favoritos
+DROP FOREIGN KEY favoritos_ibfk_1;
+
+ALTER TABLE Favoritos
+ADD CONSTRAINT favoritos_ibfk_1
+FOREIGN KEY (id_pratos) REFERENCES Pratos(id_pratos)
+ON DELETE CASCADE;
+
+DESCRIBE Pratos;
+
+SELECT * FROM Favoritos;
+
